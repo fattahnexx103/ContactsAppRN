@@ -16,12 +16,12 @@ const MainNavigator = createStackNavigator(
     Edit: {screen: EditContactScreen},
   }, {
     defaultNavigationOptions:{
-      headerTintColor: '#fff',
+      headerTintColor: 'black',
       headerStyle: {
-        backgroundColor: '#b83227'
+        backgroundColor: '#fdd835'
       },
       headerTitleStyle: {
-        color: '#fff'
+        color: 'black'
       }
     }
   }
