@@ -18,8 +18,15 @@ export default class HomeScreen extends React.Component{
   }
 
   render(){
+
+    let firstMessage = <Text></Text>;
+    if(this.state.data && this.state.data.length == 0){
+        firstMessage = <Text style={styles.textStyle}>Please Click on The + Button to Add a Contact</Text>;
+    }
+
     return (
       <View style={styles.container}>
+        {firstMessage}
         <TouchableOpacity
           style={styles.floatButton}
           onPress= {() => {
@@ -41,7 +48,8 @@ export default class HomeScreen extends React.Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black"
+    backgroundColor: "black",
+    justifyContent: 'center'
   },
   floatButton:{
     position: 'absolute',
@@ -53,5 +61,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderColor: 'black',
     borderWidth: 2,
-  }
+  },
+  textStyle: {
+      color: 'white',
+      fontSize: 16,
+      textAlign: 'center'
+    }
 });
