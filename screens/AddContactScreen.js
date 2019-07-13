@@ -7,18 +7,18 @@ export default class AddContactScreen extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-      email: "",
-      address: ""
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+      address: ''
     }
   }
 
   //Gives name to the title
   static navigationOptions = {
     title: 'Contacts App'
-  }
+  };
 
     //saving a contact
     saveContact = async () =>{
@@ -30,7 +30,6 @@ export default class AddContactScreen extends React.Component{
         this.state.address !== ''
       ){
         //if condition
-
         //create contact object
         let contact = {
           firstName: this.state.firstName,
@@ -41,12 +40,14 @@ export default class AddContactScreen extends React.Component{
         };
 
         //use asyncstorage to store
-        await AsyncStorage.setItem(Date.now().toString,
+        await AsyncStorage.setItem(Date.now().toString(),
           JSON.stringify(contact)
         ).then(() => {
           this.props.navigation.goBack(); //go back to whatever screen we were on
         }).
-        catch(error =>{console.log(error)}) //log the error
+        catch((error) =>{
+          console.log(error);
+        }) //log the error
 
       }else{
         //if all the fields are null then

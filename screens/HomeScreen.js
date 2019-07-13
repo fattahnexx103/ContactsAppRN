@@ -17,6 +17,45 @@ export default class HomeScreen extends React.Component{
     title: 'Contacts App'
   }
 
+  //immediately before initial rendering so right before render method
+  componentWillMount(){
+    let {navigation} = this.props;
+    navigation.addListener('willFocus', () =>{
+      //callback
+      this.getAllcontacts();
+    })
+  }
+
+  //get all Contacts
+  getAllcontacts = async () =>{
+    //collects all the Contacts
+    await AsyncStorage.getAllKeys()
+    .then((keys) =>{
+      console.log(keys);
+      return AsyncStorage.multiGet(keys)
+        .then((result) =>{
+          this.setState({ // set the state with  the result
+            data: result.sort(function(a,b){
+              //sorting the results alphabetically
+              //get first letter of first object and compare with b
+              if(JSON.parse(a[1]).firstName < JSON.parse(b[1])){return -1}
+              if(JSON.parse(a[1]).firstName > JSON.parse(b[1])){return 1}
+              return 0;
+            })
+          });
+        })
+        .catch((error) =>{
+          console.log("Multiget Error -- " + error);
+        })
+    })
+    .catch((error) =>{
+      console.log("Loading keys ---" + error);
+    })
+
+    //finally display the result which is now the state
+    console.log(this.state.data);
+  }
+
   render(){
 
     let firstMessage = <Text></Text>;
