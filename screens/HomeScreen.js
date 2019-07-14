@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, AsyncStorage } from 'react-native';
 import { Card } from 'native-base';
 import { Entypo } from '@expo/vector-icons'; //importing entypo icons form vector icons
+import MatIcon from 'react-native-vector-icons/MaterialIcons';
 
 export default class HomeScreen extends React.Component{
 
@@ -66,6 +67,39 @@ export default class HomeScreen extends React.Component{
     return (
       <View style={styles.container}>
         {firstMessage}
+        <FlatList
+        data={this.state.data}
+        renderItem={({item}) =>{
+          contact = JSON.parse(item[1]); //get the first name
+            return (
+              <TouchableOpacity
+                onPress={() =>{
+                  this.props.navigation.navigate('View', {
+                    key: item[0].toString() //pass the key which is the first item
+                  });
+                }}
+              >
+                <Card style={styles.contactCard}>
+                  <View style={styles.iconContainer}>
+                      <MatIcon
+                          style={styles.contactIcon}
+                          name='person'
+                          size={30}
+                          color='#fdd835'
+                       />
+                  </View>
+                  <View style={styles.infoContainer}>
+                    <Text style={styles.contactInfoText}>{contact.firstName} {contact.lastName}</Text>
+                    <Text style={styles.contactInfoText}>{contact.phoneNumber}</Text>
+                  </View>
+                </Card>
+              </TouchableOpacity>
+            )
+        }}
+        keyExtractor={(item,index) =>{
+          item[0].toString()
+        }}/>
+
         <TouchableOpacity
           style={styles.floatButton}
           onPress= {() => {
@@ -105,5 +139,21 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 16,
       textAlign: 'center'
-    }
+  },
+  contactCard:{
+    flexDirection: 'row',
+    borderColor: '#fdd835',
+    backgroundColor: 'black',
+    marginHorizontal: 50,
+  },
+  iconContainer: {
+    padding: 10,
+  },
+  infoContainer: {
+    padding: 10,
+  },
+  contactInfoText: {
+    fontSize: 16,
+    color: 'white',
+  }
 });

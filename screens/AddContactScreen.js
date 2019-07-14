@@ -17,7 +17,7 @@ export default class AddContactScreen extends React.Component{
 
   //Gives name to the title
   static navigationOptions = {
-    title: 'Contacts App'
+    title: 'Add Contact'
   };
 
     //saving a contact
