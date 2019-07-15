@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
   textStyle: {
       color: 'white',
       fontSize: 16,
+      marginTop: 300,
       textAlign: 'center'
   },
   contactCard:{
