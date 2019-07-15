@@ -158,7 +158,7 @@ export default class ViewContactScreen extends React.Component{
               <MatIcon name='delete' size={50} color='#fdd835' />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>{}}
+            onPress={() =>{this.editContact(this.state.key)}}
           >
               <MatIcon name='edit' size={50} color='#fdd835' />
           </TouchableOpacity>
